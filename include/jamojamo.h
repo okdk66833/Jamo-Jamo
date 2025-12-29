@@ -21,6 +21,10 @@ namespace jamojamo {
     // get_initials: extract initial consonants (chosung) from the text
     std::wstring get_initials(const std::wstring& text);
     std::string get_initials(const std::string& text);
+
+    // disassemble: decompose text into individual jamos
+    std::wstring disassemble(const std::wstring& text);
+    std::string disassemble(const std::string& text);
 }
 
 #endif

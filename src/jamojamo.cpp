@@ -99,4 +99,36 @@ namespace jamojamo {
         std::wstring wresult=get_initials(wtext);
         return boost::nowide::narrow(wresult);
     }
+
+    // disassemble: wstring text
+    std::wstring disassemble(const std::wstring& text){
+        std::wstring result;
+        // Reserve enough space (assuming average 2.5 jamos per hangul char)
+        result.reserve(text.length()*3);
+        
+        for(const auto& ch:text){
+            if(ch>=0xAC00 && ch<=0xD7A3){
+                int syllable_index=ch-0xAC00;
+                int cho_index=(syllable_index/28)/21;
+                int jung_index=(syllable_index/28)%21;
+                int jong_index=syllable_index%28;
+                
+                result+=CHOSUNG[cho_index];
+                result+=JUNGSUNG[jung_index];
+                if(jong_index>0){
+                    result+=JONGSUNG[jong_index];
+                }
+            }else{
+                result+=ch;
+            }
+        }
+        return result;
+    }
+
+    // disassemble: string text
+    std::string disassemble(const std::string& text){
+        std::wstring wtext=to_wstring(text);
+        std::wstring wresult=disassemble(wtext);
+        return boost::nowide::narrow(wresult);
+    }
 }
