@@ -34,3 +34,6 @@
 .vscode/
 *.png
 *.aseprite
+
+# Build directories
+build/
