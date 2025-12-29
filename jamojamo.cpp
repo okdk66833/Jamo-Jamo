@@ -216,7 +216,7 @@ namespace jamojamo {
         return L'\0';
     }
 
-    // extract_jamo: string text
+    // get_jamo: string text
     wchar_t get_jamo(const std::string& text, size_t index, char type){
         std::wstring wtext=to_wstring(text);
         return get_jamo(wtext, index, type);
