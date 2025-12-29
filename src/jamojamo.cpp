@@ -172,4 +172,29 @@ namespace jamojamo {
         std::wstring wtext=to_wstring(text);
         return has_coda(wtext);
     }
+
+    // is_hangul: wchar_t ch
+    bool is_hangul(wchar_t ch){
+        if(ch>=0xAC00 && ch<=0xD7A3) return true;
+        if(ch>=0x1100 && ch<=0x11FF) return true;
+        if(ch>=0x3130 && ch<=0x318F) return true;
+        if(ch>=0xA960 && ch<=0xA97F) return true;
+        if(ch>=0xD7B0 && ch<=0xD7FF) return true;
+        return false;
+    }
+
+    // is_hangul: char ch
+    bool is_hangul(char ch){
+        return is_hangul((wchar_t)ch);
+    }
+
+    // is_complete_hangul: wchar_t ch
+    bool is_complete_hangul(wchar_t ch){
+        return (ch>=0xAC00 && ch<=0xD7A3);
+    }
+
+    // is_complete_hangul: char ch
+    bool is_complete_hangul(char ch){
+        return is_complete_hangul((wchar_t)ch);
+    }
 }
