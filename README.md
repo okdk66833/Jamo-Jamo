@@ -3,3 +3,4 @@
 </p>
 
 # Jamo-Jamo
+A convenient C++ library for handling Hangul jamo.
