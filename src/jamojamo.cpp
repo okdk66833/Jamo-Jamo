@@ -74,5 +74,6 @@ int JamoJamo::count_jamo(const std::string& text, std::string jamo){
 // count_jamo: string text, char jamo
 int JamoJamo::count_jamo(const std::string& text, char jamo){
     return count_jamo(text, (wchar_t)jamo);
+
 }
 

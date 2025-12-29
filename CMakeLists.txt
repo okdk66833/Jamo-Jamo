@@ -10,7 +10,7 @@ else()
     find_path(BOOST_INCLUDE_DIR boost/nowide/convert.hpp)
 endif()
 
-add_library(jamojamo STATIC jamojamo.cpp include/jamojamo.h)
+add_library(jamojamo STATIC src/jamojamo.cpp include/jamojamo.h)
 target_include_directories(jamojamo PUBLIC include)
 target_include_directories(jamojamo PRIVATE ${BOOST_INCLUDE_DIR})
 
