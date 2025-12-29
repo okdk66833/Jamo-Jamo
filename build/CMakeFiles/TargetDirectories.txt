@@ -1,0 +1,4 @@
+F:/Jamo-Jamo/build/CMakeFiles/jamojamo.dir
+F:/Jamo-Jamo/build/CMakeFiles/JamoJamoExample.dir
+F:/Jamo-Jamo/build/CMakeFiles/ALL_BUILD.dir
+F:/Jamo-Jamo/build/CMakeFiles/ZERO_CHECK.dir
