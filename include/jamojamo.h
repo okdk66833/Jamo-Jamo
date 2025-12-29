@@ -35,6 +35,10 @@ namespace jamojamo {
     // is_complete_hangul: check if the character is a complete hangul syllable (Ga-Hih)
     bool is_complete_hangul(wchar_t ch);
     bool is_complete_hangul(char ch);
+
+    // get_jamo: extract a specific jamo from a character at given index
+    wchar_t get_jamo(const std::wstring& text, size_t index, char type);
+    wchar_t get_jamo(const std::string& text, size_t index, char type);
 }
 
 #endif

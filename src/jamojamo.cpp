@@ -197,4 +197,28 @@ namespace jamojamo {
     bool is_complete_hangul(char ch){
         return is_complete_hangul((wchar_t)ch);
     }
+
+    // get_jamo: wstring text
+    wchar_t get_jamo(const std::wstring& text, size_t index, char type){
+        if(index>=text.length()) return L'\0';
+        
+        wchar_t ch=text[index];
+        if(ch>=0xAC00 && ch<=0xD7A3){
+            int syllable_index=ch-0xAC00;
+            int cho_index=(syllable_index/28)/21;
+            int jung_index=(syllable_index/28)%21;
+            int jong_index=syllable_index%28;
+            
+            if(type=='o' || type=='O') return CHOSUNG[cho_index];
+            else if(type=='n' || type=='N') return JUNGSUNG[jung_index];
+            else if(type=='c' || type=='C') return JONGSUNG[jong_index];
+        }
+        return L'\0';
+    }
+
+    // extract_jamo: string text
+    wchar_t get_jamo(const std::string& text, size_t index, char type){
+        std::wstring wtext=to_wstring(text);
+        return get_jamo(wtext, index, type);
+    }
 }
