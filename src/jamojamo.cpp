@@ -76,4 +76,27 @@ namespace jamojamo {
     int count(const std::string& text, char jamo){
         return count(text, (wchar_t)jamo);
     }
+
+    // get_initials: wstring text
+    std::wstring get_initials(const std::wstring& text){
+        std::wstring result;
+        result.reserve(text.length());
+        for(const auto& ch:text){
+            if(ch>=0xAC00 && ch<=0xD7A3){
+                int syllable_index=ch-0xAC00;
+                int cho_index=(syllable_index/28)/21;
+                result+=CHOSUNG[cho_index];
+            }else{
+                result+=ch;
+            }
+        }
+        return result;
+    }
+
+    // get_initials: string text
+    std::string get_initials(const std::string& text){
+        std::wstring wtext=to_wstring(text);
+        std::wstring wresult=get_initials(wtext);
+        return boost::nowide::narrow(wresult);
+    }
 }

@@ -17,6 +17,10 @@ namespace jamojamo {
     int count(const std::string& text, const std::string& jamo);
     // string text, char jamo
     int count(const std::string& text, char jamo);
+
+    // get_initials: extract initial consonants (chosung) from the text
+    std::wstring get_initials(const std::wstring& text);
+    std::string get_initials(const std::string& text);
 }
 
 #endif
