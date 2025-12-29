@@ -22,9 +22,17 @@ namespace jamojamo {
     std::wstring get_initials(const std::wstring& text);
     std::string get_initials(const std::string& text);
 
+    // get_vowels: extract vowels (jungsung) from the text
+    std::wstring get_vowels(const std::wstring& text);
+    std::string get_vowels(const std::string& text);
+
     // disassemble: decompose text into individual jamos
     std::wstring disassemble(const std::wstring& text);
     std::string disassemble(const std::string& text);
+
+    // has_batchim: check if the last character has a final consonant (batchim)
+    bool has_batchim(const std::wstring& text);
+    bool has_batchim(const std::string& text);
 }
 
 #endif

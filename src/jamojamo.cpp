@@ -100,10 +100,32 @@ namespace jamojamo {
         return boost::nowide::narrow(wresult);
     }
 
+    // get_vowels: wstring text
+    std::wstring get_vowels(const std::wstring& text){
+        std::wstring result;
+        result.reserve(text.length());
+        for(const auto& ch:text){
+            if(ch>=0xAC00 && ch<=0xD7A3){
+                int syllable_index=ch-0xAC00;
+                int jung_index=(syllable_index/28)%21;
+                result+=JUNGSUNG[jung_index];
+            }else{
+                result+=ch;
+            }
+        }
+        return result;
+    }
+
+    // get_vowels: string text
+    std::string get_vowels(const std::string& text){
+        std::wstring wtext=to_wstring(text);
+        std::wstring wresult=get_vowels(wtext);
+        return boost::nowide::narrow(wresult);
+    }
+
     // disassemble: wstring text
     std::wstring disassemble(const std::wstring& text){
         std::wstring result;
-        // Reserve enough space (assuming average 2.5 jamos per hangul char)
         result.reserve(text.length()*3);
         
         for(const auto& ch:text){
@@ -130,5 +152,24 @@ namespace jamojamo {
         std::wstring wtext=to_wstring(text);
         std::wstring wresult=disassemble(wtext);
         return boost::nowide::narrow(wresult);
+    }
+
+    // has_batchim: wstring text
+    bool has_batchim(const std::wstring& text){
+        if(text.empty()) return false;
+        wchar_t last_char=text.back();
+        
+        if(last_char>=0xAC00 && last_char<=0xD7A3){
+            int syllable_index=last_char-0xAC00;
+            int jong_index=syllable_index%28;
+            return jong_index>0;
+        }
+        return false;
+    }
+
+    // has_batchim: string text
+    bool has_batchim(const std::string& text){
+        std::wstring wtext=to_wstring(text);
+        return has_batchim(wtext);
     }
 }
