@@ -18,21 +18,21 @@ namespace jamojamo {
     // string text, char jamo
     int count(const std::string& text, char jamo);
 
-    // get_initials: extract initial consonants (chosung) from the text
-    std::wstring get_initials(const std::wstring& text);
-    std::string get_initials(const std::string& text);
-
-    // get_vowels: extract vowels (jungsung) from the text
-    std::wstring get_vowels(const std::wstring& text);
-    std::string get_vowels(const std::string& text);
+    // get_onset: extract onsets (chosung) from the text
+    std::wstring get_onset(const std::wstring& text);
+    std::string get_onset(const std::string& text);
 
     // disassemble: decompose text into individual jamos
     std::wstring disassemble(const std::wstring& text);
     std::string disassemble(const std::string& text);
 
-    // has_batchim: check if the last character has a final consonant (batchim)
-    bool has_batchim(const std::wstring& text);
-    bool has_batchim(const std::string& text);
+    // get_nucleus: extract nuclei (jungsung) from the text
+    std::wstring get_nucleus(const std::wstring& text);
+    std::string get_nucleus(const std::string& text);
+
+    // has_coda: check if the last character has a coda (batchim)
+    bool has_coda(const std::wstring& text);
+    bool has_coda(const std::string& text);
 }
 
 #endif

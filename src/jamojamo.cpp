@@ -77,8 +77,8 @@ namespace jamojamo {
         return count(text, (wchar_t)jamo);
     }
 
-    // get_initials: wstring text
-    std::wstring get_initials(const std::wstring& text){
+    // get_onset: wstring text
+    std::wstring get_onset(const std::wstring& text){
         std::wstring result;
         result.reserve(text.length());
         for(const auto& ch:text){
@@ -93,15 +93,15 @@ namespace jamojamo {
         return result;
     }
 
-    // get_initials: string text
-    std::string get_initials(const std::string& text){
+    // get_onset: string text
+    std::string get_onset(const std::string& text){
         std::wstring wtext=to_wstring(text);
-        std::wstring wresult=get_initials(wtext);
+        std::wstring wresult=get_onset(wtext);
         return boost::nowide::narrow(wresult);
     }
 
-    // get_vowels: wstring text
-    std::wstring get_vowels(const std::wstring& text){
+    // get_nucleus: wstring text
+    std::wstring get_nucleus(const std::wstring& text){
         std::wstring result;
         result.reserve(text.length());
         for(const auto& ch:text){
@@ -116,10 +116,10 @@ namespace jamojamo {
         return result;
     }
 
-    // get_vowels: string text
-    std::string get_vowels(const std::string& text){
+    // get_nucleus: string text
+    std::string get_nucleus(const std::string& text){
         std::wstring wtext=to_wstring(text);
-        std::wstring wresult=get_vowels(wtext);
+        std::wstring wresult=get_nucleus(wtext);
         return boost::nowide::narrow(wresult);
     }
 
@@ -154,8 +154,8 @@ namespace jamojamo {
         return boost::nowide::narrow(wresult);
     }
 
-    // has_batchim: wstring text
-    bool has_batchim(const std::wstring& text){
+    // has_coda: wstring text
+    bool has_coda(const std::wstring& text){
         if(text.empty()) return false;
         wchar_t last_char=text.back();
         
@@ -167,9 +167,9 @@ namespace jamojamo {
         return false;
     }
 
-    // has_batchim: string text
-    bool has_batchim(const std::string& text){
+    // has_coda: string text
+    bool has_coda(const std::string& text){
         std::wstring wtext=to_wstring(text);
-        return has_batchim(wtext);
+        return has_coda(wtext);
     }
 }
