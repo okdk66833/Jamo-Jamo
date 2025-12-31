@@ -1,4 +1,10 @@
-# JamoJamo API Reference
+<p align="center">
+  <img width="80" height="80" alt="icon" src="https://github.com/user-attachments/assets/6e2a05e9-782c-45d3-a60b-8e734bceac3f" />
+  <br/>
+  <a href="./REFERENCE.md">English</a> | <a href="./REFERENCE.ko.md">Korean</a>
+</p>
+
+# JamoJamo API 레퍼런스
 
 모든 함수는 `jamojamo` 네임스페이스에 정의되어 있습니다.
 
