@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <jamojamo.h>
+#include <jamojamo.hpp>
 #include <boost/nowide/convert.hpp>
 
 int main(){

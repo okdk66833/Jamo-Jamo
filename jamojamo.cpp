@@ -1,4 +1,4 @@
-#include <jamojamo.h>
+#include <jamojamo.hpp>
 #include <boost/nowide/convert.hpp>
 
 namespace {
