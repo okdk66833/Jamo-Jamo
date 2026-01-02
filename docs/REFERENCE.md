@@ -1,35 +1,40 @@
 <p align="center">
   <img width="80" height="80" alt="icon" src="https://github.com/user-attachments/assets/6e2a05e9-782c-45d3-a60b-8e734bceac3f" />
   <br/>
-  <a href="./REFERENCE.md">English</a> | <a href="./REFERENCE.ko.md">Korean</a>
+  <a href="./REFERENCE.en.md">English</a> | <a href="./REFERENCE.md">Korean</a>
 </p>
 
-# JamoJamo API Reference
+# JamoJamo API 레퍼런스
 
-JamoJamo is a C++ library for processing Korean Jamo (Hangul characters). All functions are defined in the `jamojamo` namespace.
+JamoJamo는 한글 자모 처리를 위한 C++ 라이브러리입니다. 모든 함수는 `jamojamo` 네임스페이스에 정의되어 있습니다.
 
-## Table of Contents
+## 목차
 
-- [Count Jamo](#count)
-- [Extract Onset](#get_onset)
-- [Extract Nucleus](#get_nucleus)
-- [Disassemble](#disassemble)
-- [Check Coda](#has_coda)
-- [Check Hangul](#is_hangul)
-- [Check Complete Hangul](#is_complete_hangul)
-- [Extract Jamo](#get_jamo)
+- [함수](#함수)
+  - [count](#count)
+  - [get_onset](#get_onset)
+  - [get_nucleus](#get_nucleus)
+  - [disassemble](#disassemble)
+  - [has_coda](#has_coda)
+  - [is_hangul](#is_hangul)
+  - [is_complete_hangul](#is_complete_hangul)
+  - [get_jamo](#get_jamo)
+- [사용 예시](#사용-예시)
+- [참고사항](#참고사항)
 
 ---
 
+## 함수
+
 <a id="count"></a>
-## count
+### count
 
-Counts the number of occurrences of a specific jamo in the text.
+텍스트에서 특정 자모의 개수를 세는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `int` | `count(const std::wstring& text, wchar_t jamo)` |
 | `int` | `count(const std::wstring& text, const std::string& jamo)` |
 | `int` | `count(const std::wstring& text, char jamo)` |
@@ -37,18 +42,18 @@ Counts the number of occurrences of a specific jamo in the text.
 | `int` | `count(const std::string& text, const std::string& jamo)` |
 | `int` | `count(const std::string& text, char jamo)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to search |
-| `jamo` | `wchar_t` / `const std::string&` / `char` | Jamo to find (onset, nucleus, or coda) |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 검색할 텍스트 |
+| `jamo` | `wchar_t` / `const std::string&` / `char` | 찾을 자모 (초성, 중성, 종성 모두 가능) |
 
-### Return Value
+#### 반환값
 
-Total number of occurrences of the jamo in the text (including jamos inside complete Hangul syllables)
+텍스트에서 해당 자모가 나타나는 총 개수 (완성형 한글 내부의 자모도 포함)
 
-### Example
+#### 예시
 
 ```cpp
 std::string text = "안녕하세요";
@@ -59,28 +64,28 @@ int cnt2 = jamojamo::count(text, "ㅏ"); // 1
 ---
 
 <a id="get_onset"></a>
-## get_onset
+### get_onset
 
-Extracts only the onsets (initial consonants) from the text.
+텍스트에서 초성(onset)만 추출하는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `std::wstring` | `get_onset(const std::wstring& text)` |
 | `std::string` | `get_onset(const std::string& text)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to extract from |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 추출할 텍스트 |
 
-### Return Value
+#### 반환값
 
-String containing only the onset of each character. Non-Hangul characters are preserved as-is.
+각 글자의 초성만 추출한 문자열. 한글이 아닌 문자는 그대로 유지됩니다.
 
-### Example
+#### 예시
 
 ```cpp
 std::string text = "안녕하세요";
@@ -90,28 +95,28 @@ std::string result = jamojamo::get_onset(text);  // "ㅇㄴㅎㅅㅇ"
 ---
 
 <a id="get_nucleus"></a>
-## get_nucleus
+### get_nucleus
 
-Extracts only the nuclei (vowels) from the text.
+텍스트에서 중성(nucleus)만 추출하는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `std::wstring` | `get_nucleus(const std::wstring& text)` |
 | `std::string` | `get_nucleus(const std::string& text)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to extract from |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 추출할 텍스트 |
 
-### Return Value
+#### 반환값
 
-String containing only the nucleus of each character. Non-Hangul characters are preserved as-is.
+각 글자의 중성만 추출한 문자열. 한글이 아닌 문자는 그대로 유지됩니다.
 
-### Example
+#### 예시
 
 ```cpp
 std::string text = "안녕하세요";
@@ -121,28 +126,28 @@ std::string result = jamojamo::get_nucleus(text);  // "ㅏㅕㅏㅔㅛ"
 ---
 
 <a id="disassemble"></a>
-## disassemble
+### disassemble
 
-Decomposes complete Hangul syllables into individual jamos.
+완성형 한글을 개별 자모로 완전히 분해하는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `std::wstring` | `disassemble(const std::wstring& text)` |
 | `std::string` | `disassemble(const std::string& text)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to disassemble |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 분해할 텍스트 |
 
-### Return Value
+#### 반환값
 
-String with each complete Hangul syllable decomposed into onset+nucleus+coda. If there is no coda, only onset+nucleus is returned.
+각 완성형 한글을 초성+중성+종성으로 분해한 문자열. 종성이 없는 경우 초성+중성만 반환됩니다.
 
-### Example
+#### 예시
 
 ```cpp
 std::string text = "한글";
@@ -152,28 +157,28 @@ std::string result = jamojamo::disassemble(text);  // "ㅎㅏㄴㄱㅡㄹ"
 ---
 
 <a id="has_coda"></a>
-## has_coda
+### has_coda
 
-Checks if the last character of the string has a coda (final consonant).
+문자열의 마지막 글자에 받침(종성/coda)이 있는지 확인하는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `bool` | `has_coda(const std::wstring& text)` |
 | `bool` | `has_coda(const std::string& text)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to check |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 확인할 텍스트 |
 
-### Return Value
+#### 반환값
 
-Returns `true` if the last character has a coda, `false` otherwise.
+마지막 글자에 받침이 있으면 `true`, 없으면 `false`
 
-### Example
+#### 예시
 
 ```cpp
 std::string word1 = "사과";
@@ -181,114 +186,117 @@ std::string word2 = "수박";
 bool has1 = jamojamo::has_coda(word1);  // false
 bool has2 = jamojamo::has_coda(word2);  // true
 
-// Useful for particle selection
+// 조사 선택에 활용
 std::string particle = jamojamo::has_coda(word1) ? "은" : "는";  // "는"
 ```
 
 ---
 
 <a id="is_hangul"></a>
-## is_hangul
+### is_hangul
 
-Checks if a character is Hangul (including both complete syllables and jamos).
+문자가 한글인지 확인하는 함수입니다. 완성형 한글과 자모 모두 포함합니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `bool` | `is_hangul(wchar_t ch)` |
 | `bool` | `is_hangul(char ch)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `ch` | `wchar_t` / `char` | Character to check |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `ch` | `wchar_t` / `char` | 확인할 문자 |
 
-### Return Value
+#### 반환값
 
-Returns `true` if the character is Hangul, `false` otherwise.
+한글이면 `true`, 아니면 `false`
 
-### Example
+#### 예시
 
 ```cpp
 bool result1 = jamojamo::is_hangul(L'가');  // true
-bool result2 = jamojamo::is_hangul(L'ㄱ');  // true (jamo)
+bool result2 = jamojamo::is_hangul(L'ㄱ');  // true (자모)
 bool result3 = jamojamo::is_hangul(L'A');   // false
 ```
 
 ---
 
 <a id="is_complete_hangul"></a>
-## is_complete_hangul
+### is_complete_hangul
 
-Checks if a character is a complete Hangul syllable (Ga-Hih range). Excludes jamos.
+문자가 완성형 한글(가~힣)인지 확인하는 함수입니다. 자모는 제외합니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `bool` | `is_complete_hangul(wchar_t ch)` |
 | `bool` | `is_complete_hangul(char ch)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `ch` | `wchar_t` / `char` | Character to check |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `ch` | `wchar_t` / `char` | 확인할 문자 |
 
-### Return Value
+#### 반환값
 
-Returns `true` if the character is a complete Hangul syllable, `false` otherwise.
+완성형 한글이면 `true`, 아니면 `false`
 
-### Example
+#### 예시
 
 ```cpp
 bool result1 = jamojamo::is_complete_hangul(L'가');  // true
-bool result2 = jamojamo::is_complete_hangul(L'ㄱ');   // false (jamo)
+bool result2 = jamojamo::is_complete_hangul(L'ㄱ');   // false (자모)
 bool result3 = jamojamo::is_complete_hangul(L'A');   // false
 ```
 
 ---
 
 <a id="get_jamo"></a>
-## get_jamo
+### get_jamo
 
-Extracts a specific jamo (onset, nucleus, or coda) from a character at a given index.
+특정 위치의 글자에서 초성, 중성, 또는 종성을 개별적으로 추출하는 함수입니다.
 
-### Signature
+#### 시그니처
 
-| Return Type | Function Signature |
-|------------|-------------------|
+| 반환 타입 | 함수 시그니처 |
+|----------|--------------|
 | `wchar_t` | `get_jamo(const std::wstring& text, size_t index, char type)` |
 | `wchar_t` | `get_jamo(const std::string& text, size_t index, char type)` |
 
-### Parameters
+#### 파라미터
 
-| Parameter | Type | Description |
-|-----------|------|------------|
-| `text` | `const std::wstring&` / `const std::string&` | Text to extract from |
-| `index` | `size_t` | Character position (0-based) |
-| `type` | `char` | Jamo type to extract: `'o'`/`'O'` (onset), `'n'`/`'N'` (nucleus), `'c'`/`'C'` (coda) |
+| 파라미터 | 타입 | 설명 |
+|---------|------|------|
+| `text` | `const std::wstring&` / `const std::string&` | 추출할 텍스트 |
+| `index` | `size_t` | 글자의 위치 (0부터 시작) |
+| `type` | `char` | 추출할 자모 타입: `'o'`/`'O'` (초성), `'n'`/`'N'` (중성), `'c'`/`'C'` (종성) |
 
-### Return Value
+#### 반환값
 
-Extracted jamo. Returns `'\0'` if the character is not Hangul or the index is out of range.
+추출된 자모. 한글이 아니거나 인덱스가 범위를 벗어나면 `'\0'`을 반환합니다.
 
-### Example
+#### 예시
 
 ```cpp
 std::wstring text = L"한글";
-wchar_t cho = jamojamo::get_jamo(text, 0, 'o');  // L'ㅎ' (onset)
-wchar_t jung = jamojamo::get_jamo(text, 0, 'n'); // L'ㅏ' (nucleus)
-wchar_t jong = jamojamo::get_jamo(text, 0, 'c'); // L'ㄴ' (coda)
+wchar_t cho = jamojamo::get_jamo(text, 0, 'o');  // L'ㅎ' (초성)
+wchar_t jung = jamojamo::get_jamo(text, 0, 'n'); // L'ㅏ' (중성)
+wchar_t jong = jamojamo::get_jamo(text, 0, 'c'); // L'ㄴ' (종성)
 ```
 
 ---
 
-## Usage Examples
+## 사용 예시 {#사용-예시}
 
-### Automatic Particle Selection
+<details>
+<summary><b>조사 자동 선택</b></summary>
+
+`has_coda`를 사용하여 올바른 조사를 자동으로 선택합니다.
 
 ```cpp
 std::string word = "사과";
@@ -296,27 +304,46 @@ std::string particle = jamojamo::has_coda(word) ? "은" : "는";
 std::cout << word << particle << std::endl;  // "사과는"
 ```
 
-### Initial Consonant Search
+</details>
+
+<details>
+<summary><b>초성 검색</b></summary>
+
+검색 기능을 위한 초성을 추출합니다.
 
 ```cpp
 std::string text = "안녕하세요";
 std::string initials = jamojamo::get_onset(text);  // "ㅇㄴㅎㅅㅇ"
-// Can be used for initial consonant search
 ```
 
-### Jamo Analysis
+</details>
+
+<details>
+<summary><b>자모 분석</b></summary>
+
+자세한 자모 수준 분석을 위해 텍스트를 분해합니다.
 
 ```cpp
 std::string text = "한글";
 std::string decomposed = jamojamo::disassemble(text);  // "ㅎㅏㄴㄱㅡㄹ"
-// Can analyze each jamo individually
 ```
+
+</details>
 
 ---
 
-## Notes
+## 참고사항 {#참고사항}
 
-- All functions support both `std::wstring` and `std::string` overloads.
-- When using UTF-8 encoded `std::string`, internal conversion uses `boost::nowide`.
-- Complete Hangul range: `0xAC00` (가) ~ `0xD7A3` (힣)
-- Jamos: 19 onsets, 21 nuclei, 28 codas (including none).
+<dl>
+<dt><strong>문자열 오버로딩</strong></dt>
+<dd>모든 함수는 <code>std::wstring</code>과 <code>std::string</code> 오버로딩을 지원합니다.</dd>
+
+<dt><strong>UTF-8 변환</strong></dt>
+<dd>UTF-8 인코딩의 <code>std::string</code>을 사용할 때는 내부적으로 <code>boost::nowide</code>를 사용하여 변환합니다.</dd>
+
+<dt><strong>한글 범위</strong></dt>
+<dd>완성형 한글 범위: <code>0xAC00</code> (가) ~ <code>0xD7A3</code> (힣)</dd>
+
+<dt><strong>자모 개수</strong></dt>
+<dd>자모: 초성 19개, 중성 21개, 종성 28개(없음 포함)</dd>
+</dl>
