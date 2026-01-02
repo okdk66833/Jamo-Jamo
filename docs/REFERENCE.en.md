@@ -291,7 +291,7 @@ wchar_t jong = jamojamo::get_jamo(text, 0, 'c'); // L'ㄴ' (coda)
 
 ---
 
-## Usage Examples {#usage-examples}
+## Usage Examples
 
 <details>
 <summary><b>Automatic Particle Selection</b></summary>
@@ -332,7 +332,7 @@ std::string decomposed = jamojamo::disassemble(text);  // "ㅎㅏㄴㄱㅡㄹ"
 
 ---
 
-## Notes {#notes}
+## Notes
 
 <dl>
 <dt><strong>String Overloading</strong></dt>

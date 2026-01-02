@@ -291,7 +291,7 @@ wchar_t jong = jamojamo::get_jamo(text, 0, 'c'); // L'ㄴ' (종성)
 
 ---
 
-## 사용 예시 {#사용-예시}
+## 사용 예시
 
 <details>
 <summary><b>조사 자동 선택</b></summary>
@@ -332,7 +332,7 @@ std::string decomposed = jamojamo::disassemble(text);  // "ㅎㅏㄴㄱㅡㄹ"
 
 ---
 
-## 참고사항 {#참고사항}
+## 참고사항
 
 <dl>
 <dt><strong>문자열 오버로딩</strong></dt>
